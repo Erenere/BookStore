@@ -8,6 +8,7 @@ namespace BookStore.BookOperations.UpdateBook
     {
         private readonly BookStoreDbContext _dbContext;
         public UpdateBookModel Model { get; set; }
+        public int bookId { get; set; }
 
         public UpdateBookCommand(BookStoreDbContext dbContext)
         {
@@ -16,13 +17,11 @@ namespace BookStore.BookOperations.UpdateBook
 
         public void Handle()
         {
-            var book = _dbContext.Books.SingleOrDefault(x => x.Title == Model.Title);
+            var book = _dbContext.Books.SingleOrDefault(x => x.Id == bookId);
             if (book is null)
                 throw new InvalidOperationException("Book does not exist");
 
             book.GenreId = Model.GenreId != default ? Model.GenreId : book.GenreId;
-            book.PageCount = Model.PageCount != default ? Model.PageCount : book.PageCount;
-            book.PublishDate = Model.PublishDate != default ? Model.PublishDate : book.PublishDate;
             book.Title = Model.Title != default ? Model.Title : book.Title;
 
             _dbContext.SaveChanges();
@@ -33,8 +32,6 @@ namespace BookStore.BookOperations.UpdateBook
         {
             public string Title { get; set; }
             public int GenreId { get; set; }
-            public int PageCount { get; set; }
-            public DateTime PublishDate { get; set; }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BookStore.BookOperations.CreateBook;
+using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.GetBook;
 using BookStore.BookOperations.GetBooks;
 using BookStore.BookOperations.UpdateBook;
@@ -77,8 +78,8 @@ namespace BookStore.Controllers
                 //     PageCount = book.PageCount,
                 //     PublishDate = book.PublishDate
                 // };
+                command.bookId = id;
                 command.Model = model;
-
                 command.Handle();
             }
             catch (Exception e)
@@ -91,12 +92,17 @@ namespace BookStore.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            var book = _context.Books.SingleOrDefault(x => x.Id == id);
-            if (book is null)
-                return BadRequest();
-
-            _context.Books.Remove(book);
-            _context.SaveChanges();
+            try
+            {
+                DeleteBookCommand command = new DeleteBookCommand(_context);
+                command.bookId = id;
+                command.Handle();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
             return Ok();
         }
     }
