@@ -40,9 +40,9 @@ namespace BookStore.Controllers
         public IActionResult GetById(int id)
         {
             GetBookQuery.BookViewModel result;
-            GetBookQuery query = new GetBookQuery(_context,_mapper);
             try
             {
+                GetBookQuery query = new GetBookQuery(_context,_mapper);
                 query.bookId = id;
                 GetBookQueryValidator validator = new GetBookQueryValidator();
                 validator.ValidateAndThrow(query);
@@ -77,16 +77,10 @@ namespace BookStore.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateBook(int id, [FromBody] UpdateBookCommand.UpdateBookModel model)
         {
-            UpdateBookCommand command = new UpdateBookCommand(_context);
+            
             try
             {
-                //var book = _context.Books.SingleOrDefault(x => x.Id == id);
-                // var updateModel = new UpdateBookCommand.UpdateBookModel
-                // {
-                //     GenreId = book.GenreId,
-                //     PageCount = book.PageCount,
-                //     PublishDate = book.PublishDate
-                // };
+                UpdateBookCommand command = new UpdateBookCommand(_context);
                 command.bookId = id;
                 command.Model = model;
                 UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
