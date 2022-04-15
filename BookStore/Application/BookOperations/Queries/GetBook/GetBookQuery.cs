@@ -4,6 +4,7 @@ using AutoMapper;
 using BookStore.BookOperations.GetBooks;
 using BookStore.Common;
 using BookStore.DBOperations;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.BookOperations.GetBook
 {
@@ -21,7 +22,7 @@ namespace BookStore.BookOperations.GetBook
 
         public BookViewModel Handle()
         {
-            var book = _dbContext.Books.SingleOrDefault(x => x.Id == bookId);
+            var book = _dbContext.Books.Include(x=>x.Genre).SingleOrDefault(x => x.Id == bookId);
             if (book is null)
                 throw new InvalidOperationException("Book does not exist");
 

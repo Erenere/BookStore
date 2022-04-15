@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using BookStore.DBOperations;
+using BookStore.Entities;
 
 namespace BookStore.BookOperations.CreateBook
 {
