@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using BookStore.Application.BookOperations.Commands.CreateBook;
 using BookStore.BookOperations.CreateBook;
 using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.GetBook;
@@ -18,7 +19,6 @@ namespace BookStore.Controllers
     [Route("[controller]s")]
     public class BookController :ControllerBase
     {
-        //private static List<Book> BookList = new List<Book>() { };
         private readonly BookStoreDbContext _context;
         private readonly IMapper _mapper;
 

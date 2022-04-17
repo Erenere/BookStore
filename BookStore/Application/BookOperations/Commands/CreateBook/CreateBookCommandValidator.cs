@@ -1,4 +1,5 @@
 ﻿using System;
+using BookStore.Application.BookOperations.Commands.CreateBook;
 using FluentValidation;
 
 namespace BookStore.BookOperations.CreateBook
