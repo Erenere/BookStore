@@ -7,7 +7,6 @@ namespace BookStore.Application.AuthorOperations.Commands.CreateAuthor
 {
     public class CreateAuthorCommand
     {
-        public CreateAuthorModel Model { get; set; }
         private readonly BookStoreDbContext _context;
 
         public CreateAuthorCommand(BookStoreDbContext context)
@@ -15,9 +14,12 @@ namespace BookStore.Application.AuthorOperations.Commands.CreateAuthor
             _context = context;
         }
 
+        public CreateAuthorModel Model { get; set; }
+
         public void Handle()
         {
-            var author = _context.Authors.SingleOrDefault(x => x.FirstName + x.LastName == Model.FirstName + Model.LastName);
+            var author =
+                _context.Authors.SingleOrDefault(x => x.FirstName + x.LastName == Model.FirstName + Model.LastName);
             if (author is not null)
                 throw new InvalidOperationException("Author already exists.");
 

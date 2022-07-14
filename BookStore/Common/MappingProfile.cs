@@ -2,11 +2,11 @@
 using BookStore.Application.AuthorOperations.Queries.GetAuthorDetail;
 using BookStore.Application.AuthorOperations.Queries.GetAuthors;
 using BookStore.Application.BookOperations.Commands.CreateBook;
+using BookStore.Application.BookOperations.Queries.GetBook;
+using BookStore.Application.BookOperations.Queries.GetBooks;
 using BookStore.Application.GenreOperations.Queries.GetGenreDetail;
 using BookStore.Application.GenreOperations.Queries.GetGenres;
-using BookStore.BookOperations.CreateBook;
 using BookStore.BookOperations.GetBook;
-using BookStore.BookOperations.GetBooks;
 using BookStore.Entities;
 
 namespace BookStore.Common

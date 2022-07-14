@@ -2,17 +2,18 @@
 using System.Linq;
 using BookStore.DBOperations;
 
-namespace BookStore.BookOperations.DeleteBook
+namespace BookStore.Application.BookOperations.Commands.DeleteBook
 {
     public class DeleteBookCommand
     {
-        private readonly BookStoreDbContext _dbContext;
-        public int bookId { get; set; }
+        private readonly IBookStoreDbContext _dbContext;
 
-        public DeleteBookCommand(BookStoreDbContext dbContext)
+        public DeleteBookCommand(IBookStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
+        public int bookId { get; set; }
 
         public void Handle()
         {

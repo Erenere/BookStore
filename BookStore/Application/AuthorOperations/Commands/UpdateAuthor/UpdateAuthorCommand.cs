@@ -6,14 +6,15 @@ namespace BookStore.Application.AuthorOperations.Commands.UpdateAuthor
 {
     public class UpdateAuthorCommand
     {
-        public int AuthorId { get; set; }
-        public UpdateAuthorModel Model {get; set; }
         private readonly BookStoreDbContext _context;
 
         public UpdateAuthorCommand(BookStoreDbContext context)
         {
             _context = context;
         }
+
+        public int AuthorId { get; set; }
+        public UpdateAuthorModel Model { get; set; }
 
         public void Handle()
         {
@@ -22,7 +23,7 @@ namespace BookStore.Application.AuthorOperations.Commands.UpdateAuthor
                 throw new InvalidOperationException("Author does not exist.");
 
             if (_context.Authors.Any(x =>
-                (x.FirstName + x.LastName).ToLower() == (Model.FirstName + Model.LastName).ToLower()));
+                (x.FirstName + x.LastName).ToLower() == (Model.FirstName + Model.LastName).ToLower())) ;
 
             author.FirstName = Model.FirstName;
             author.LastName = Model.LastName;

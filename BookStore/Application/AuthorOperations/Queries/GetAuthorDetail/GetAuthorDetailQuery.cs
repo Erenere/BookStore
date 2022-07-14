@@ -7,7 +7,6 @@ namespace BookStore.Application.AuthorOperations.Queries.GetAuthorDetail
 {
     public class GetAuthorDetailQuery
     {
-        public int AuthorId { get; set; }
         private readonly BookStoreDbContext _context;
         private readonly IMapper _mapper;
 
@@ -16,6 +15,8 @@ namespace BookStore.Application.AuthorOperations.Queries.GetAuthorDetail
             _context = context;
             _mapper = mapper;
         }
+
+        public int AuthorId { get; set; }
 
         public AuthorDetailViewModel Handle()
         {

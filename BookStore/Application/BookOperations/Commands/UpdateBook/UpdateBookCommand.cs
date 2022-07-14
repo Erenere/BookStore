@@ -2,18 +2,19 @@
 using System.Linq;
 using BookStore.DBOperations;
 
-namespace BookStore.BookOperations.UpdateBook
+namespace BookStore.Application.BookOperations.Commands.UpdateBook
 {
     public class UpdateBookCommand
     {
-        private readonly BookStoreDbContext _dbContext;
-        public UpdateBookModel Model { get; set; }
-        public int bookId { get; set; }
+        private readonly IBookStoreDbContext _dbContext;
 
-        public UpdateBookCommand(BookStoreDbContext dbContext)
+        public UpdateBookCommand(IBookStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
+        public UpdateBookModel Model { get; set; }
+        public int bookId { get; set; }
 
         public void Handle()
         {
@@ -26,8 +27,8 @@ namespace BookStore.BookOperations.UpdateBook
 
             _dbContext.SaveChanges();
         }
-        
-        
+
+
         public class UpdateBookModel
         {
             public string Title { get; set; }

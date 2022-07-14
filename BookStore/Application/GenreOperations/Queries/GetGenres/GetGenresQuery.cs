@@ -7,10 +7,10 @@ namespace BookStore.Application.GenreOperations.Queries.GetGenres
 {
     public class GetGenresQuery
     {
-        public readonly BookStoreDbContext _context;
+        public readonly IBookStoreDbContext _context;
         public readonly IMapper _mapper;
 
-        public GetGenresQuery(BookStoreDbContext context, IMapper mapper)
+        public GetGenresQuery(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -19,7 +19,7 @@ namespace BookStore.Application.GenreOperations.Queries.GetGenres
         public List<GenresViewModel> Handle()
         {
             var genres = _context.Genres.Where(x => x.IsActive).OrderBy(x => x.Id);
-            List<GenresViewModel> returnObj = _mapper.Map<List<GenresViewModel>>(genres);
+            var returnObj = _mapper.Map<List<GenresViewModel>>(genres);
             return returnObj;
         }
     }

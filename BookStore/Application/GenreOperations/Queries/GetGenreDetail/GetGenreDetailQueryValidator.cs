@@ -2,7 +2,7 @@
 
 namespace BookStore.Application.GenreOperations.Queries.GetGenreDetail
 {
-    public class GetGenreDetailQueryValidator: AbstractValidator<GetGenreDetailQuery>
+    public class GetGenreDetailQueryValidator : AbstractValidator<GetGenreDetailQuery>
     {
         public GetGenreDetailQueryValidator()
         {

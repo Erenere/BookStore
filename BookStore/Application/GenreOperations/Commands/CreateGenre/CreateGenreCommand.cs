@@ -7,13 +7,14 @@ namespace BookStore.Application.GenreOperations.Commands.CreateGenre
 {
     public class CreateGenreCommand
     {
-        public CreateGenreModel Model { get; set; }
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
 
-        public CreateGenreCommand(BookStoreDbContext context)
+        public CreateGenreCommand(IBookStoreDbContext context)
         {
             _context = context;
         }
+
+        public CreateGenreModel Model { get; set; }
 
         public void Handle()
         {

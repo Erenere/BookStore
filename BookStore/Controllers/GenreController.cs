@@ -4,7 +4,6 @@ using BookStore.Application.GenreOperations.Commands.DeleteGenre;
 using BookStore.Application.GenreOperations.Commands.UpdateGenre;
 using BookStore.Application.GenreOperations.Queries.GetGenreDetail;
 using BookStore.Application.GenreOperations.Queries.GetGenres;
-using BookStore.BookOperations.DeleteBook;
 using BookStore.DBOperations;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +14,10 @@ namespace BookStore.Controllers
     [Route("[controller]s")]
     public class GenreController : Controller
     {
-        public readonly BookStoreDbContext _context;
+        public readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public GenreController(IMapper mapper, BookStoreDbContext context)
+        public GenreController(IMapper mapper, IBookStoreDbContext context)
         {
             _mapper = mapper;
             _context = context;
@@ -27,7 +26,7 @@ namespace BookStore.Controllers
         [HttpGet]
         public ActionResult GetGenres()
         {
-            GetGenresQuery query = new GetGenresQuery(_context, _mapper);
+            var query = new GetGenresQuery(_context, _mapper);
             var obj = query.Handle();
             return Ok(obj);
         }
@@ -35,11 +34,11 @@ namespace BookStore.Controllers
         [HttpGet("id")]
         public ActionResult GetGenreDetail(int id)
         {
-            GetGenreDetailQuery query = new GetGenreDetailQuery(_context, _mapper);
+            var query = new GetGenreDetailQuery(_context, _mapper);
             query.GenreId = id;
-            GetGenreDetailQueryValidator validator = new GetGenreDetailQueryValidator();
+            var validator = new GetGenreDetailQueryValidator();
             validator.ValidateAndThrow(query);
-            
+
             var obj = query.Handle();
             return Ok(obj);
         }
@@ -47,12 +46,12 @@ namespace BookStore.Controllers
         [HttpPost]
         public IActionResult AddGenre([FromBody] CreateGenreModel newGenre)
         {
-            CreateGenreCommand command = new CreateGenreCommand(_context);
+            var command = new CreateGenreCommand(_context);
             command.Model = newGenre;
 
-            CreateGenreCommandValidator validator = new CreateGenreCommandValidator();
+            var validator = new CreateGenreCommandValidator();
             validator.ValidateAndThrow(command);
-            
+
             command.Handle();
             return Ok();
         }
@@ -60,13 +59,13 @@ namespace BookStore.Controllers
         [HttpPut("id")]
         public IActionResult UpdateGenre(int id, [FromBody] UpdateGenreModel updateGenre)
         {
-            UpdateGenreCommand command = new UpdateGenreCommand(_context);
+            var command = new UpdateGenreCommand(_context);
             command.GenreId = id;
             command.Model = updateGenre;
 
-            UpdateGenreCommandValidator validator = new UpdateGenreCommandValidator();
+            var validator = new UpdateGenreCommandValidator();
             validator.ValidateAndThrow(command);
-            
+
             command.Handle();
             return Ok();
         }
@@ -74,12 +73,12 @@ namespace BookStore.Controllers
         [HttpDelete("id")]
         public IActionResult DeleteGenre(int id)
         {
-            DeleteGenreCommand command = new DeleteGenreCommand(_context);
+            var command = new DeleteGenreCommand(_context);
             command.GenreId = id;
 
-            DeleteGenreCommandValidator validator = new DeleteGenreCommandValidator();
+            var validator = new DeleteGenreCommandValidator();
             validator.ValidateAndThrow(command);
-            
+
             command.Handle();
             return Ok();
         }

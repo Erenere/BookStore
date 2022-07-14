@@ -20,10 +20,11 @@ namespace BookStore.Application.AuthorOperations.Queries.GetAuthors
         public List<AuthorsViewModel> Handle()
         {
             var authors = _context.Authors.OrderBy(x => x.Id);
-            List<AuthorsViewModel> returnObj = _mapper.Map<List<AuthorsViewModel>>(authors);
+            var returnObj = _mapper.Map<List<AuthorsViewModel>>(authors);
             return returnObj;
         }
     }
+
     public class AuthorsViewModel
     {
         public int Id { get; set; }

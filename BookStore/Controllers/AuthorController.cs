@@ -26,7 +26,7 @@ namespace BookStore.Controllers
         [HttpGet]
         public ActionResult GetAuthors()
         {
-            GetAuthorsQuery query = new GetAuthorsQuery(_context, _mapper);
+            var query = new GetAuthorsQuery(_context, _mapper);
             var obj = query.Handle();
             return Ok(obj);
         }
@@ -34,9 +34,9 @@ namespace BookStore.Controllers
         [HttpGet("id")]
         public ActionResult GetAuthorDetail(int id)
         {
-            GetAuthorDetailQuery query = new GetAuthorDetailQuery(_context, _mapper);
+            var query = new GetAuthorDetailQuery(_context, _mapper);
             query.AuthorId = id;
-            GetAuthorDetailQueryValidator validator = new GetAuthorDetailQueryValidator();
+            var validator = new GetAuthorDetailQueryValidator();
             validator.ValidateAndThrow(query);
 
             var obj = query.Handle();
@@ -46,10 +46,10 @@ namespace BookStore.Controllers
         [HttpPost]
         public IActionResult AddAuthor([FromBody] CreateAuthorModel newAuthor)
         {
-            CreateAuthorCommand command = new CreateAuthorCommand(_context);
+            var command = new CreateAuthorCommand(_context);
             command.Model = newAuthor;
 
-            CreateAuthorCommandValidator validator = new CreateAuthorCommandValidator();
+            var validator = new CreateAuthorCommandValidator();
             validator.ValidateAndThrow(command);
 
             command.Handle();
@@ -59,11 +59,11 @@ namespace BookStore.Controllers
         [HttpPut("id")]
         public IActionResult UpdateAuthor(int id, [FromBody] UpdateAuthorModel updateAuthor)
         {
-            UpdateAuthorCommand command = new UpdateAuthorCommand(_context);
+            var command = new UpdateAuthorCommand(_context);
             command.AuthorId = id;
             command.Model = updateAuthor;
 
-            UpdateAuthorCommandValidator validator = new UpdateAuthorCommandValidator();
+            var validator = new UpdateAuthorCommandValidator();
             validator.ValidateAndThrow(command);
             command.Handle();
             return Ok();
@@ -72,15 +72,14 @@ namespace BookStore.Controllers
         [HttpDelete("id")]
         public IActionResult DeleteAuthor(int id)
         {
-            DeleteAuthorCommand command = new DeleteAuthorCommand(_context);
+            var command = new DeleteAuthorCommand(_context);
             command.AuthorId = id;
 
-            DeleteAuthorCommandValidator validator = new DeleteAuthorCommandValidator();
+            var validator = new DeleteAuthorCommandValidator();
             validator.ValidateAndThrow(command);
-            
+
             command.Handle();
             return Ok();
         }
-
     }
 }

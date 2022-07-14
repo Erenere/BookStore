@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using BookStore.Common;
 using BookStore.DBOperations;
-using BookStore.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.BookOperations.GetBooks
+namespace BookStore.Application.BookOperations.Queries.GetBooks
 {
     public class GetBooksQuery
     {
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
-        
-        public GetBooksQuery(BookStoreDbContext dbContext, IMapper mapper)
+
+        public GetBooksQuery(IBookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -22,8 +19,8 @@ namespace BookStore.BookOperations.GetBooks
 
         public List<BooksViewModel> Handle()
         {
-            var bookList = _dbContext.Books.Include(x=>x.Genre).OrderBy(x => x.Id).ToList<Book>();
-            List<BooksViewModel> vm = _mapper.Map<List<BooksViewModel>>(bookList);
+            var bookList = _dbContext.Books.Include(x => x.Genre).OrderBy(x => x.Id).ToList();
+            var vm = _mapper.Map<List<BooksViewModel>>(bookList);
             return vm;
         }
     }

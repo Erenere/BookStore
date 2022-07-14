@@ -8,6 +8,5 @@ namespace BookStore.Application.AuthorOperations.Commands.DeleteAuthor
         {
             RuleFor(command => command.AuthorId).GreaterThan(0);
         }
-        
     }
 }

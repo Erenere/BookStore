@@ -6,14 +6,15 @@ namespace BookStore.Application.GenreOperations.Commands.UpdateGenre
 {
     public class UpdateGenreCommand
     {
-        public int GenreId { get; set; }
-        public UpdateGenreModel Model { get; set; }
-        private readonly BookStoreDbContext _context;
-        
-        public UpdateGenreCommand(BookStoreDbContext context)
+        private readonly IBookStoreDbContext _context;
+
+        public UpdateGenreCommand(IBookStoreDbContext context)
         {
             _context = context;
         }
+
+        public int GenreId { get; set; }
+        public UpdateGenreModel Model { get; set; }
 
         public void Handle()
         {
@@ -32,7 +33,7 @@ namespace BookStore.Application.GenreOperations.Commands.UpdateGenre
 
     public class UpdateGenreModel
     {
-        public  string Name { get; set; }
+        public string Name { get; set; }
         public bool IsActive { get; set; }
     }
 }
