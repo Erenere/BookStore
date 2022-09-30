@@ -6,14 +6,13 @@ namespace BookStore.Application.AuthorOperations.Commands.DeleteAuthor
 {
     public class DeleteAuthorCommand
     {
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
+        public int AuthorId { get; set; }
 
-        public DeleteAuthorCommand(BookStoreDbContext context)
+        public DeleteAuthorCommand(IBookStoreDbContext context)
         {
             _context = context;
         }
-
-        public int AuthorId { get; set; }
 
         public void Handle()
         {
@@ -21,7 +20,7 @@ namespace BookStore.Application.AuthorOperations.Commands.DeleteAuthor
             if (author is null)
                 throw new InvalidOperationException("Author does not exist");
 
-            _context.Remove(author);
+            _context.Authors.Remove(author);
             _context.SaveChanges();
         }
     }

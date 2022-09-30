@@ -55,6 +55,27 @@ namespace BookStore.DBOperations
                         PageCount = 540,
                         PublishDate = new DateTime(1981, 12, 21)
                     });
+
+                context.Authors.AddRange(
+                    new Author
+                    {
+                        FirstName = "Albert",
+                        LastName = "Camus",
+                        DateOfBirth = new DateTime(1912, 10, 15)
+                    },
+                    new Author
+                    {
+                        FirstName = "Muazzez",
+                        LastName = "Cig",
+                        DateOfBirth = new DateTime(1922,11,25)
+                    },
+                    new Author
+                    {
+                        FirstName = "Stefan",
+                        LastName = "Zweig",
+                        DateOfBirth = new DateTime(1901,06,11)
+                    }
+                    );
                 context.SaveChanges();
             }
         }

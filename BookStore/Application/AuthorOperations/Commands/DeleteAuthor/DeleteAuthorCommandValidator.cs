@@ -6,7 +6,7 @@ namespace BookStore.Application.AuthorOperations.Commands.DeleteAuthor
     {
         public DeleteAuthorCommandValidator()
         {
-            RuleFor(command => command.AuthorId).GreaterThan(0);
+            RuleFor(command => command.AuthorId).GreaterThan(0).NotEmpty();
         }
     }
 }

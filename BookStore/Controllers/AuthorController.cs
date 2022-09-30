@@ -14,10 +14,10 @@ namespace BookStore.Controllers
     [Route("[controller]s")]
     public class AuthorController : Controller
     {
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public AuthorController(IMapper mapper, BookStoreDbContext context)
+        public AuthorController(IMapper mapper, IBookStoreDbContext context)
         {
             _mapper = mapper;
             _context = context;
@@ -69,12 +69,12 @@ namespace BookStore.Controllers
             return Ok();
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAuthor(int id)
         {
             var command = new DeleteAuthorCommand(_context);
             command.AuthorId = id;
-
+            
             var validator = new DeleteAuthorCommandValidator();
             validator.ValidateAndThrow(command);
 

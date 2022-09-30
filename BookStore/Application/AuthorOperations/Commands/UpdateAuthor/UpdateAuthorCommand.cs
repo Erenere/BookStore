@@ -6,9 +6,9 @@ namespace BookStore.Application.AuthorOperations.Commands.UpdateAuthor
 {
     public class UpdateAuthorCommand
     {
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
 
-        public UpdateAuthorCommand(BookStoreDbContext context)
+        public UpdateAuthorCommand(IBookStoreDbContext context)
         {
             _context = context;
         }
@@ -23,11 +23,17 @@ namespace BookStore.Application.AuthorOperations.Commands.UpdateAuthor
                 throw new InvalidOperationException("Author does not exist.");
 
             if (_context.Authors.Any(x =>
-                (x.FirstName + x.LastName).ToLower() == (Model.FirstName + Model.LastName).ToLower())) ;
+                (x.FirstName + x.LastName).ToLower() == (Model.FirstName + Model.LastName).ToLower() 
+                && x.Id != AuthorId))
+                throw new InvalidOperationException("Author already exists");
 
-            author.FirstName = Model.FirstName;
-            author.LastName = Model.LastName;
-            author.DateOfBirth = Model.DateOfBirth;
+            author.FirstName = string.IsNullOrEmpty(Model.FirstName.Trim()) ? author.FirstName : Model.FirstName;
+            author.LastName = string.IsNullOrEmpty(Model.LastName.Trim()) ? author.LastName : Model.LastName;
+            author.DateOfBirth = Model.DateOfBirth != default ? author.DateOfBirth : Model.DateOfBirth;
+                
+            // author.FirstName = Model.FirstName;
+            // author.LastName = Model.LastName;
+            //author.DateOfBirth = Model.DateOfBirth;
             _context.SaveChanges();
         }
     }
