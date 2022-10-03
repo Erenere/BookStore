@@ -55,6 +55,7 @@ namespace TestProject1.Application.AuthorOperations.Commands.UpdateCommand
             UpdateAuthorModel model = new UpdateAuthorModel() {FirstName = "Examplef", LastName = "Examplel"};
             command.Model = model;
             
+
             FluentActions.Invoking(()=>command.Handle()).Invoke();
 
             var author = _context.Authors.SingleOrDefault(a => a.Id == command.AuthorId);

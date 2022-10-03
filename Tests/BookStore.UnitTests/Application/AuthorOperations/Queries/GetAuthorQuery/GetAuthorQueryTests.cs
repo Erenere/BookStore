@@ -38,6 +38,10 @@ namespace TestProject1.Application.AuthorOperations.Queries.GetAuthorQuery
             var authorId = 1;
             query.AuthorId = authorId;
             
+            foreach (var contextAuthor in _context.Authors)
+            {
+                Console.WriteLine(contextAuthor);
+            }
             Author author = _context.Authors.SingleOrDefault(x => x.Id == authorId);
             author.Should().NotBeNull();
         }

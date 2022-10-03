@@ -13,7 +13,10 @@ namespace TestProject1.TestSetup
                 {
                     Title = "Lean Startup", GenreId = 0, PageCount = 200, PublishDate = new DateTime(2001, 06, 12)
                 },
-                new Book {Title = "Herland", GenreId = 1, PageCount = 250, PublishDate = new DateTime(2010, 05, 23)},
+                new Book
+                {
+                    Title = "Herland", GenreId = 1, PageCount = 250, PublishDate = new DateTime(2010, 05, 23)
+                },
                 new Book
                 {
                     Title = "Frankestein", GenreId = 1, PageCount = 540, PublishDate = new DateTime(1981, 12, 21)

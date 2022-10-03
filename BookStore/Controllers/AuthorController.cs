@@ -31,7 +31,7 @@ namespace BookStore.Controllers
             return Ok(obj);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public ActionResult GetAuthorDetail(int id)
         {
             var query = new GetAuthorDetailQuery(_context, _mapper);
@@ -56,7 +56,7 @@ namespace BookStore.Controllers
             return Ok();
         }
 
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public IActionResult UpdateAuthor(int id, [FromBody] UpdateAuthorModel updateAuthor)
         {
             var command = new UpdateAuthorCommand(_context);
